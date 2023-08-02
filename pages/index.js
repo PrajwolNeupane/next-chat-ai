@@ -4,25 +4,29 @@ import Link from "next/link";
 
 export default function Home() {
 
-  const {isLoading,error,user} = useUser();
+  const { isLoading, error, user } = useUser();
 
-  if(isLoading) return <div>Loading...</div>
-  if(error) return <div>{error.message}</div>
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>{error.message}</div>
 
   return (
-    <div>
+    <>
       <Head>
-        <title>Next JS ChatGPT Starter</title>
+        <title>Chat AI - Login or Signup</title>
       </Head>
-      <h1>Welcome to the Next JS &amp; ChatGPT Starter</h1>
-      <div>
-        {
-          !!user && <Link href={"/api/auth/logout"}>LogOut</Link>
-        }
-        {
-          !user &&    <Link href={"/api/auth/login"}>Login</Link>
-        }
+      <div className="flex justify-center items-center min-h-screen w-full bg-gray-800 text-white text-center">
+        <div>
+          {
+            !!user && <Link href={"/api/auth/logout"}>LogOut</Link>
+          }
+          {
+            !user && <>
+            <Link className="rounded-md bg-emerald-500 px-4 py-2 text-white hover:bg-emerald-600" href={"/api/auth/login"}>Login</Link>
+            <Link className="rounded-md bg-emerald-500 px-4 py-2 text-white hover:bg-emerald-600" href={"/api/auth/signup"}>Signup</Link>
+            </>
+          }
+        </div>
       </div>
-    </div>
+    </>
   );
 }
